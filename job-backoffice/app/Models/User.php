@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Companies;
+use App\Models\Resume;
 
 class User extends Authenticatable
 {
@@ -57,5 +59,22 @@ class User extends Authenticatable
             'password' => 'hashed',
             'deleted_at' => 'datetime',
         ];
+    }
+
+    // Define relationship with Companies model
+    // has many relationship 
+    public function companies()
+    {
+        return $this->hasOne(Companies::class, 'owenerId', 'id');
+    }
+
+    public function resumes()
+    {
+        return $this->hasMany(Resumes::class, 'userId', 'id');
+    }
+
+    public function jobApplications()
+    {
+        return $this->hasMany(JobApplications::class, 'userId', 'id');
     }
 }

@@ -4,16 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('companies', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('name');
+            $table->string('address');
+            $table->string('industry');
+            $table->string('website')->nullable();
+
             $table->timestamps();
+            $table->softDeletes();
+
+            // Relationship to users table
+            $table->uuid('owenerId');
+            $table->foreign('owenerId')->references('id')->on('users')->onDelete('restrict');
         });
     }
 
