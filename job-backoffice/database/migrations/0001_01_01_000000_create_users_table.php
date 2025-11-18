@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['admin', 'company-owner', 'job-seeker'])->default('job-seeker');
+            $table->enum('role', ['admin', 'company_owner', 'job_seeker'])->default('job_seeker');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
